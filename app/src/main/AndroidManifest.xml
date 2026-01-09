@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.taewon.mygallag">
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ship_0000"
@@ -8,6 +8,7 @@
         android:roundIcon="@mipmap/ship_0000"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+
         <activity
             android:name=".StartActivity"
             android:exported="true">
@@ -16,7 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".MainActivity"/>
+
         <activity android:name=".ResultActivity"/>
     </application>
 

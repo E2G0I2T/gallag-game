@@ -1,17 +1,23 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// 상단 buildscript 부분은 건드리지 마세요
 buildscript {
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.0'
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.android.tools.build:gradle:8.2.2'
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// ▼▼▼ 여기부터 추가하세요 (모든 프로젝트에 저장소 강제 주입) ▼▼▼
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' } // 여기에 JitPack을 넣습니다.
+    }
 }

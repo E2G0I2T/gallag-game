@@ -18,21 +18,24 @@ public class AlienSprite extends Sprite{
     private Context context;
     private SpaceInvadersView game;
     ArrayList<AlienShotSprite> alienShotSprites;
+    private int aLife = 3;
     Handler fireHandler = null;
     boolean isDestroyed = false;
-    public AlienSprite(Context context, SpaceInvadersView game, int resId, int x, int y){
+    private StarshipSprite starship;
+    public AlienSprite(Context context, SpaceInvadersView game, StarshipSprite starship, int resId, int x, int y) {
         // 외계인 만들기
         super(context, resId, x, y);
         this.context = context;
         this.game = game;
+        this.starship = starship;
         alienShotSprites = new ArrayList<>();
+        aLife = 3;
         Random r = new Random();
         int randomDx = r.nextInt(5);
-        int randomDy = r.nextInt(5);
+        int randomDy = r.nextInt(4);
         // 0 ~ 4 중 랜덤한 숫자를 randomDx, randomDy 에 담음
-        if(randomDy <= 0) dy = 1; // randomDy 가 0 보다 작거나 같을 경우 1을 dy 에 담음
         dx = randomDx; // dx = 0 ~ 4
-        dy = randomDy; // dy = 1 ~ 4
+        dy = randomDy + 1; // dy = 1 ~ 4
         fireHandler = new Handler(Looper.getMainLooper());
         // Main Thread 의 MessageQueue 에 바인딩
         fireHandler.postDelayed(
@@ -53,13 +56,26 @@ public class AlienSprite extends Sprite{
         }
     @Override
     public void move() {
-        super.move();
-        if ((dx < 0) && (x < 10) || ((dx > 0) && (x > 800))) { // 속도가 벽을 향하는 상태로 벽과 부딪힐 경우 벽과 반대 방향으로 이동하게 하는 if 문
+        super.move(); // 일단 이동
+
+        // 1. 벽에 튕기거나 화면 아래로 사라지는 기존 코드
+        if ((dx < 0) && (x < 10) || ((dx > 0) && (x > 900))) {
             dx = -dx;
-            if (y > game.screenH) { // y축이 game.screenH 보다 커질 경우 ( 화면 아래쪽으로 나갈 경우) 실행
-                game.removeSprite(this); // 이 스프라이트를 제거함
-            }
         }
+        if (y > game.screenH) {
+            game.removeSprite(this);
+            game.setCurrEnemyCount(game.getCurrEnemyCount() - 1);
+        }
+
+        // ▼▼▼ [판정 박스 축소 코드 적용] ▼▼▼
+        float hitBoxSize = 50;
+        float offsetX = (getWidth() - hitBoxSize) / 2;
+        float offsetY = (getHeight() - hitBoxSize) / 2;
+
+        getRect().left = x + offsetX;
+        getRect().top = y + offsetY;
+        getRect().right = getRect().left + hitBoxSize;
+        getRect().bottom = getRect().top + hitBoxSize;
     }
 
 
@@ -67,9 +83,17 @@ public class AlienSprite extends Sprite{
     public void handleCollision(Sprite Other) { // Other 파라미터를 통해 다른 Sprite를 받음
         if (Other instanceof ShotSprite) { // Other Sprite가 ShotSprite 의 인스턴스인 경우 (가져온 Sprite 가 총알인 경우)
             game.removeSprite(Other); // 총알을 없애고
-            game.removeSprite(this); // this(AlienSprite) 를 없앤다
-            destroyAlien(); // destroyAlien() 을 호출해서 적 숫자 줄이고 아이템을 드랍하고... 등을 수행한다
-            return;
+            int powerLevel = starship.getPowerLevel();
+            for (int i = -1; i < powerLevel; i++) {
+                if (aLife > 0) {
+                    aLife--;
+                }
+            }
+            if (aLife <= 0) {
+                game.removeSprite(this); // this(AlienSprite) 를 없앤다
+                destroyAlien(); // destroyAlien() 을 호출해서 적 숫자 줄이고 아이템을 드랍하고... 등을 수행한다
+                return;
+            }
         }
         if (Other instanceof SpecialshotSprite) { // Other Sprite가 SpecialshotSprite 의 인스턴스인 경우 (가져온 Sprite 가 필살기인 경우)
             game.removeSprite(this); // this(AlienSprite) 를 없앤다
@@ -90,6 +114,14 @@ public class AlienSprite extends Sprite{
         // 아이템 드랍
         game.setScore(game.getScore() + 1); // 게임 스코어로 +1 함
         MainActivity.scoreTv.setText(Integer.toString(game.getScore())); // scoreTv 에 현재 게임 스코어를 가져와서 표시함
+
+        Handler removeHandler = new Handler(Looper.getMainLooper());
+        removeHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                game.removeSprite(AlienSprite.this);
+            }
+        }, 1000); // 1초 지연 (필요에 따라 수정 가능)
     }
 
     private void fire() {

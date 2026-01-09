@@ -21,12 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-import io.github.controlwear.virtual.joystick.android.JoystickView;
-
 public class MainActivity extends AppCompatActivity {
 
     private Intent userIntent;
-    int bgMusincIndex;
     ArrayList<Integer> bgMusicList; // 배경 음악을 넣을 ArrayList
     public static SoundPool effectSound;
     public static float effectVolumn;
@@ -56,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         userIntent = getIntent(); // startActivity 에서 보낸 characterId를 userIntent에 입력
         bgMusicIndex = 0; // bgMusincIndex 를 0으로 초기화
-        bgMusicList = new ArrayList<Integer>(); // 배경 음악 넣을 arrayList 생성
+        bgMusicList = new ArrayList<>(); // 배경 음악 넣을 arrayList 생성
         bgMusicList.add(R.raw.main_game_bgm1);
         bgMusicList.add(R.raw.main_game_bgm2);
         bgMusicList.add(R.raw.main_game_bgm3); // bgMusicList에 배경 음악 입력
@@ -127,6 +124,13 @@ public class MainActivity extends AppCompatActivity {
     private void changeBgMusic(){ // 음악 파일 변경
         bgMusic = MediaPlayer.create(this, bgMusicList.get(bgMusicIndex)); // bgMusicList 에서 bgMusicIndex 에 입력된 값 만큼의 순서에 있는 곡을 가져옴
         bgMusic.start(); // 음악 파일 재생
+        bgMusic.setOnCompletionListener(new MediaPlayer.OnCompletionListener() { // 음악이 끝나면
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                bgMusic.release();
+                changeBgMusic(); // changeBgMusic()을 호출해서 음악 변경
+            }
+        });
         bgMusicIndex++; // 음악 바꾸기 위해 bgMusicIndex 증가
         bgMusicIndex = bgMusicIndex % bgMusicList.size(); // 음악 개수 만큼만 바뀌게 하기 위해
     }

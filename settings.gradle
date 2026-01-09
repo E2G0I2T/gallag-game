@@ -1,10 +1,12 @@
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+pluginManagement {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        gradlePluginPortal()
     }
 }
+
+// dependencyResolutionManagement 블록을 아예 삭제했습니다.
+
 rootProject.name = "mygallag"
 include ':app'

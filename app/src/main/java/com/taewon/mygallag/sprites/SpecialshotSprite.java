@@ -23,13 +23,15 @@ public class SpecialshotSprite extends Sprite{
         }, 5000); // 5초 이후에 autoRemove() 로 필살기는 종료됨
     }
 
+    @Override
     public void move(){
         super.move();
-        this.x = game.getPlayer().getX() - getWidth() + 240;
-        // SpecialshotSprite의 x = 플레이어의 x 좌표 - 스프라이트 가로 길이 + 240
+        // 플레이어의 x좌표 + (플레이어 너비 / 2) = 플레이어의 정중앙
+        // 거기서 (내 너비 / 2)를 빼면 내(레이저) 중심이 플레이어 중심과 일치됨
+        this.x = game.getPlayer().getX() + (game.getPlayer().getWidth() / 2) - (getWidth() / 2);
+
+        // y좌표는 플레이어 머리 위에서 나가도록 설정
         this.y = game.getPlayer().getY() - getHeight();
-        // SpecialshotSprite의 y = 플레이어의 y 좌표 - 스프라이트 세로 길이
-        // 위와 같은 계산을 해야 하는 이유 : SpecialshotSprite 가 플레이어의 중심에서 나가도록 하기 위함
     }
 
     public void autoRemove(){

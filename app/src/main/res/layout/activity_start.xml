@@ -38,55 +38,44 @@
             android:stretchColumns="*"
             android:layout_gravity="bottom"
             android:layout_marginBottom="70dp"
-            android:layout_marginHorizontal="20dp">
-
+            android:layout_marginHorizontal="40dp">
             <TableRow
                 android:layout_marginBottom="20dp">
                 <ImageView
                     android:id="@+id/ship_001"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ship_0000"/>
                 <ImageView
                     android:id="@+id/ship_002"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ship_0001"/>
                 <ImageView
                     android:id="@+id/ship_003"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ship_0002"/>
-                <ImageView
-                    android:id="@+id/ship_004"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ship_0003"/>
             </TableRow>
 
             <TableRow
                 android:layout_marginBottom="20dp">
                 <ImageView
+                    android:id="@+id/ship_004"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ship_0003"/>
+                <ImageView
                     android:id="@+id/ship_005"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ship_0004"/>
                 <ImageView
                     android:id="@+id/ship_006"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:src="@drawable/ship_0005"/>
-                <ImageView
-                    android:id="@+id/ship_007"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ship_0006"/>
-                <ImageView
-                    android:id="@+id/ship_008"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ship_0007"/>
-                </TableRow>
+            </TableRow>
         </TableLayout>
 
         <TextView

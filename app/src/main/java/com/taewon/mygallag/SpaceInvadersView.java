@@ -84,7 +84,7 @@
             int x = r.nextInt(300) + 100; // int x -> 100 ~ 399 사이의 무작위 정수
             int y = r.nextInt(300) + 100; // int y -> 100 ~ 399 사이의 무작위 정수
             // 외계인 아이템
-            Sprite alien = new AlienSprite(context, this, R.drawable.ship_0002, 100 + x, 100 + y);
+            Sprite alien = new AlienSprite(context, this, (StarshipSprite) starship, R.drawable.alienship, 100 + x, 100 + y);
             // AlienSprite 객체를 현재 액티비티의 alien에  생성
             // 이미지는 ship_0002, x 좌표는 100 + int x, y 좌표는 100 + y 에 생성
             sprites.add(alien); // 생성된 alien 을 sprites ArrayList 에 추가

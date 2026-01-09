@@ -18,10 +18,10 @@ public class StartActivity extends AppCompatActivity {
     ImageButton startBtn; // activity_start -> 시작버튼
     TextView guideTv; // activity_start -> 가이드 버튼 ( 캐릭터를 선택하세요 )
     MediaPlayer mediaPlayer; // mediaplayer 는 상대적으로 음악과 같이 음원의 길이가 긴 것들을 한 번에 하나씩 재생하는데 용이한 구조
-    ImageView imgView[] = new ImageView[8]; // 객체의 배열을 생성, 배열의 크기는 8로 설정
-    Integer img_id[] = {R.id.ship_001, R.id.ship_002, R.id.ship_003, R.id.ship_004, R.id.ship_005, R.id.ship_006, R.id.ship_007, R.id.ship_008};
+    ImageView imgView[] = new ImageView[6]; // 객체의 배열을 생성, 배열의 크기는 8로 설정
+    Integer img_id[] = {R.id.ship_001, R.id.ship_002, R.id.ship_003, R.id.ship_004, R.id.ship_005, R.id.ship_006};
     // 배열 생성 및 ship_001..2. 저장
-    Integer img[] = {R.drawable.ship_0000, R.drawable.ship_0001, R.drawable.ship_0002, R.drawable.ship_0003, R.drawable.ship_0004, R.drawable.ship_0005, R.drawable.ship_0006, R.drawable.ship_0007};
+    Integer img[] = {R.drawable.ship_0000, R.drawable.ship_0001, R.drawable.ship_0002, R.drawable.ship_0003, R.drawable.ship_0004, R.drawable.ship_0005};
     // 배열 생성 및 ship_0000..0001.. 저장
     SoundPool soundPool; // soundPool 은 길이가 짧은 소리에 대해 효과적으로 사용할 수 있는 안드로이드 내장 라이브러리
 
@@ -65,6 +65,18 @@ public class StartActivity extends AppCompatActivity {
             startActivity(intent); // 액티비티 실행
             finish(); // 전 액티비티 종료
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
     }
 
     @Override

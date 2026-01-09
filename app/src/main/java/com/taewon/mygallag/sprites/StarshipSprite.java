@@ -50,17 +50,27 @@ public class StarshipSprite extends Sprite{
         }
     }
 
+    @Override
     public void move(){
-        // 벽에 부딪히면 못 가게 하기
-        if((dx < 0) && (x < 120)) return;
-        // dx 속도가 0 보다 작을 경우 (왼쪽으로 움직일 경우) && x 좌표가 120 보다 작을 경우(왼쪽 벽에 붙어있을 경우) move() 메소드를 종료한다
+        // 1. 화면 밖으로 못 나가게 막는 기존 코드
+        if((dx < 0) && (x < 20)) return;
         if((dx > 0) && (x > game.screenW - 120)) return;
-        // dx 속도가 0 보다 클 경우 (오른쪽으로 움직일 경우) && x 좌표가 스크린 오른쪽 끝 - 120 보다 클 경우(오른쪽 벽에 붙어있을 경우) move() 메소드를 종료한다
         if((dy < 0) && (y < 120)) return;
-        // dy 속도가 0 보다 작을 경우 (위쪽으로 움직일 경우) && y 좌표가 120 보다 작을 경우(위쪽 벽에 붙어있을 경우) move() 메소드를 종료한다
         if((dy > 0) && (y > game.screenH - 120)) return;
-        // dy 속도가 0 보다 클 경우 (아래쪽으로 움직일 경우) && x 좌표가 스크린 아레쪽 끝 - 120 보다 클 경우(아래쪽 벽에 붙어있을 경우) move() 메소드를 종료한다
-        super.move();
+
+        super.move(); // 일단 이동
+
+        // ▼▼▼ [판정 박스 축소 코드 적용] ▼▼▼
+        // 이미지는 75px이지만, 충돌 판정은 중앙 50px만 적용합니다.
+        float hitBoxSize = 50;
+        float offsetX = (getWidth() - hitBoxSize) / 2; // (75 - 50) / 2 = 12.5px 여백
+        float offsetY = (getHeight() - hitBoxSize) / 2;
+
+        // 충돌 박스(Rect)를 강제로 줄입니다.
+        getRect().left = x + offsetX;
+        getRect().top = y + offsetY;
+        getRect().right = getRect().left + hitBoxSize;
+        getRect().bottom = getRect().top + hitBoxSize;
     }
 
     // 총알 개수 리턴
@@ -79,17 +89,18 @@ public class StarshipSprite extends Sprite{
 
     // 총알 발사
     public void fire(){
-        if (isReloading | isSpecialShooting){return;} // 재장전 중 이거나 스킬을 사용하고 있는 도중 fire 를 호출 하면 리턴
-        MainActivity.effectSound(MainActivity.PLAYER_SHOT); // MainActivity 의 effectSound(PLAYER_SHOT) 실행
-        // ShotSprite 생성자 구현
-        ShotSprite shot = new ShotSprite(context, game, bulletSprites.get(powerLevel), getX() + 10, getY() - 30, -16);
-        // SpaceInvadersView 의 getSprites() 구현
-        game.getSprites().add(shot);
-        bullets --; // 총알 개수 차감
+        if (isReloading | isSpecialShooting){return;}
+        MainActivity.effectSound(MainActivity.PLAYER_SHOT);
 
-        MainActivity.bulletCount.setText(bullets + "/30"); // bulletCount 에 차감 된 bullets + "/30" 을 실행
+        // [수정] -15를 -25로 변경 (오른쪽으로 쏠린 만큼 왼쪽으로 더 당김)
+        ShotSprite shot = new ShotSprite(context, game, bulletSprites.get(powerLevel), getX() + (getWidth() / 2) - 40, getY() - 30, -16);
+
+        game.getSprites().add(shot);
+        bullets --;
+
+        MainActivity.bulletCount.setText(bullets + "/30");
         Log.d("bullets", bullets + "/30");
-        if(bullets == 0){ // 총알 개수가 0이면 재장전(reloadBullets())을 호출하고 리턴
+        if(bullets == 0){
             reloadBullets();
             return;
         }

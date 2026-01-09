@@ -30,4 +30,9 @@ public class ResultActivity extends AppCompatActivity {
         // getIntent().getIntExtra("score", 0)을 호출하여 "score"라는 이름의 Extra 값을 가져 온다, 해당 Extra 값이 존재 하지 않을 경우 기본 값으로 0을 사용 한다.
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
 }
