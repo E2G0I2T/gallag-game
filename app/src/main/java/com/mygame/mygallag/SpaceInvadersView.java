@@ -1,4 +1,4 @@
-    package com.taewon.mygallag;
+    package com.mygame.mygallag;
 
     import android.content.Context;
     import android.content.Intent;
@@ -12,9 +12,9 @@
 
     import androidx.annotation.NonNull;
 
-    import com.taewon.mygallag.sprites.AlienSprite;
-    import com.taewon.mygallag.sprites.Sprite;
-    import com.taewon.mygallag.sprites.StarshipSprite;
+    import com.mygame.mygallag.sprites.AlienSprite;
+    import com.mygame.mygallag.sprites.Sprite;
+    import com.mygame.mygallag.sprites.StarshipSprite;
 
     import java.util.ArrayList;
     import java.util.Random;

@@ -1,4 +1,4 @@
-package com.taewon.mygallag;
+package com.mygame.mygallag;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.graphics.Point;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -70,12 +69,11 @@ public class MainActivity extends AppCompatActivity {
         scoreTv = findViewById(R.id.score);
         fireBtn = findViewById(R.id.fireBtn);
         reloadBtn = findViewById(R.id.reloadBtn);
-        gameFrame = findViewById(R.id.gameFrame); // 첫번째 LinearLayout
+        gameFrame = findViewById(R.id.gameFrame);
         pauseBtn = findViewById(R.id.pauseBtn);
         lifeFrame = findViewById(R.id.lifeFrame);
-        // findViewById 메서드는 해당 ID에 해당하는 뷰를 찾아서 뷰 객체로 반환하므로, 이후에는 해당 뷰를 조작하거나 이벤트 처리 등을 수행할 수 있습니다.
 
-        init(); // init() 호출
+        init();
         setBtnBehavior(); //조이스틱 작동 함수
     }
 

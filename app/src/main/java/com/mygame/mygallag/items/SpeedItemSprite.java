@@ -1,11 +1,11 @@
-package com.taewon.mygallag.items;
+package com.mygame.mygallag.items;
 
 
 import android.content.Context;
 
-import com.taewon.mygallag.R;
-import com.taewon.mygallag.SpaceInvadersView;
-import com.taewon.mygallag.sprites.Sprite;
+import com.mygame.mygallag.R;
+import com.mygame.mygallag.SpaceInvadersView;
+import com.mygame.mygallag.sprites.Sprite;
 
 import java.util.Timer;
 import java.util.TimerTask;

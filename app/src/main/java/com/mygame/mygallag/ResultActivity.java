@@ -1,4 +1,4 @@
-package com.taewon.mygallag;
+package com.mygame.mygallag;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,7 +32,7 @@ public class ResultActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
+        super.onBackPressed();
     }
 
 }

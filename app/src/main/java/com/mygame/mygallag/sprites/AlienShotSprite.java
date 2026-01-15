@@ -1,9 +1,9 @@
-package com.taewon.mygallag.sprites;
+package com.mygame.mygallag.sprites;
 
 import android.content.Context;
 
-import com.taewon.mygallag.R;
-import com.taewon.mygallag.SpaceInvadersView;
+import com.mygame.mygallag.R;
+import com.mygame.mygallag.SpaceInvadersView;
 
 public class AlienShotSprite extends Sprite{
     private Context context;

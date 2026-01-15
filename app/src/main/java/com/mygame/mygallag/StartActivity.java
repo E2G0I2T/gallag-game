@@ -1,4 +1,4 @@
-package com.taewon.mygallag;
+package com.mygame.mygallag;
 
 import android.content.Intent;
 import android.media.AudioManager;
@@ -54,7 +54,7 @@ public class StartActivity extends AppCompatActivity {
                 // 로드한 음원(reload_sound), 왼쪽 음의 크기, 오른쪽 음의 크기, 우선 순위, 반복 재생 횟수, 재생 속도
             });
         }
-        init(); // 58번 method
+        init();
     }
     private void init(){ // GONE = 뷰를 숨기고 공간도 제거, INVISIBLE = 뷰를 숨기지만 공간은 유지
         findViewById(R.id.startBtn).setVisibility(View.GONE); // 버튼 위치는 남겨 두고 숨기기

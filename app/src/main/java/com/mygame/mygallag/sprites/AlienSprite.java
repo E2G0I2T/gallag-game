@@ -1,15 +1,15 @@
-package com.taewon.mygallag.sprites;
+package com.mygame.mygallag.sprites;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 
-import com.taewon.mygallag.MainActivity;
-import com.taewon.mygallag.SpaceInvadersView;
-import com.taewon.mygallag.items.HealitemSprite;
-import com.taewon.mygallag.items.PowerItemSprite;
-import com.taewon.mygallag.items.SpeedItemSprite;
+import com.mygame.mygallag.MainActivity;
+import com.mygame.mygallag.SpaceInvadersView;
+import com.mygame.mygallag.items.HealitemSprite;
+import com.mygame.mygallag.items.PowerItemSprite;
+import com.mygame.mygallag.items.SpeedItemSprite;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -48,7 +48,7 @@ public class AlienSprite extends Sprite{
                         boolean isFire = r.nextInt(100) + 1 <= 30;
                         // 0~99 중 랜덤 숫자 + 1 (1 ~ 100) 이 30보다 작거나 같을 경우 (30%의 확률)로 isFire 가 true 가 됨
                         if(isFire && !isDestroyed){ // isFire 가 true, isDestroy 가 false 인 경우 if 문 실행
-                            fire(); // 총알을 발사
+                            fire();
                             fireHandler.postDelayed(this, 1000); // 1 초 후 실행
                         }
                     }
@@ -67,7 +67,6 @@ public class AlienSprite extends Sprite{
             game.setCurrEnemyCount(game.getCurrEnemyCount() - 1);
         }
 
-        // ▼▼▼ [판정 박스 축소 코드 적용] ▼▼▼
         float hitBoxSize = 50;
         float offsetX = (getWidth() - hitBoxSize) / 2;
         float offsetY = (getHeight() - hitBoxSize) / 2;

@@ -1,19 +1,20 @@
-package com.taewon.mygallag.items;
+package com.mygame.mygallag.items;
+
 
 import android.content.Context;
 
-import com.taewon.mygallag.R;
-import com.taewon.mygallag.SpaceInvadersView;
-import com.taewon.mygallag.sprites.Sprite;
+import com.mygame.mygallag.R;
+import com.mygame.mygallag.SpaceInvadersView;
+import com.mygame.mygallag.sprites.Sprite;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class HealitemSprite extends Sprite {
+public class PowerItemSprite extends Sprite {
     SpaceInvadersView game;
 
-    public HealitemSprite(Context context, SpaceInvadersView game, int x, int y, int dx, int dy){
-        super(context, R.drawable.heal_item, x, y);
+    public PowerItemSprite(Context context, SpaceInvadersView game, int x, int y, int dx, int dy) {
+        super(context, R.drawable.power_item, x, y);
         this.game = game;
         this.dx = dx;
         this.dy = dy;
@@ -24,14 +25,12 @@ public class HealitemSprite extends Sprite {
             public void run() {
                 autoRemove();
             }
-        }, 10000); // 10초 후에 autoRemove() 를 호출해서 이 아이템을 없앰
+        }, 15000); // 15초 후에 autoRemove() 를 호출해서 이 아이템을 없앰
     }
-
-    private void autoRemove(){game.removeSprite(this);}
+    private void autoRemove() {game.removeSprite(this);}
     // SpaceInvadersView 의 removeSprite 를 호출해서 아이템을 없앰
-
     @Override
-    public void move(){ // 아이템이 가장자리에 부딪히면 아이템 이동 방향을 바꿈
+    public void move() { // 아이템이 가장자리에 부딪히면 아이템 이동 방향을 바꿈
         if((dx < 0) && (x < 120)){
             dx *= -1;
             return;

@@ -1,4 +1,4 @@
-package com.taewon.mygallag;
+package com.mygame.mygallag;
 
 import android.content.Context;
 

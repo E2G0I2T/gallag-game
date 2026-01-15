@@ -1,9 +1,9 @@
-package com.taewon.mygallag.sprites;
+package com.mygame.mygallag.sprites;
 
 
 import android.content.Context;
 
-import com.taewon.mygallag.SpaceInvadersView;
+import com.mygame.mygallag.SpaceInvadersView;
 
 import java.util.Timer;
 import java.util.TimerTask;

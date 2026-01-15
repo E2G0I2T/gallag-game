@@ -1,4 +1,4 @@
-package com.taewon.mygallag.sprites;
+package com.mygame.mygallag.sprites;
 
 import android.content.Context;
 import android.graphics.RectF;
@@ -6,12 +6,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.taewon.mygallag.MainActivity;
-import com.taewon.mygallag.R;
-import com.taewon.mygallag.SpaceInvadersView;
-import com.taewon.mygallag.items.HealitemSprite;
-import com.taewon.mygallag.items.PowerItemSprite;
-import com.taewon.mygallag.items.SpeedItemSprite;
+import com.mygame.mygallag.MainActivity;
+import com.mygame.mygallag.R;
+import com.mygame.mygallag.SpaceInvadersView;
+import com.mygame.mygallag.items.HealitemSprite;
+import com.mygame.mygallag.items.PowerItemSprite;
+import com.mygame.mygallag.items.SpeedItemSprite;
 
 import java.util.ArrayList;
 
@@ -60,13 +60,10 @@ public class StarshipSprite extends Sprite{
 
         super.move(); // 일단 이동
 
-        // ▼▼▼ [판정 박스 축소 코드 적용] ▼▼▼
-        // 이미지는 75px이지만, 충돌 판정은 중앙 50px만 적용합니다.
         float hitBoxSize = 50;
         float offsetX = (getWidth() - hitBoxSize) / 2; // (75 - 50) / 2 = 12.5px 여백
         float offsetY = (getHeight() - hitBoxSize) / 2;
 
-        // 충돌 박스(Rect)를 강제로 줄입니다.
         getRect().left = x + offsetX;
         getRect().top = y + offsetY;
         getRect().right = getRect().left + hitBoxSize;
@@ -92,7 +89,6 @@ public class StarshipSprite extends Sprite{
         if (isReloading | isSpecialShooting){return;}
         MainActivity.effectSound(MainActivity.PLAYER_SHOT);
 
-        // [수정] -15를 -25로 변경 (오른쪽으로 쏠린 만큼 왼쪽으로 더 당김)
         ShotSprite shot = new ShotSprite(context, game, bulletSprites.get(powerLevel), getX() + (getWidth() / 2) - 40, getY() - 30, -16);
 
         game.getSprites().add(shot);
